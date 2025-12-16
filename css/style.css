@@ -1,7 +1,5 @@
 /**
- Theme Name: MYSELF
- Author: AWESOME THEMEZ
- Version: 1.0.0
+ Author: yaf
 */
 
 /*=== Google Fonts ===*/
@@ -312,7 +310,7 @@ textarea {
     max-height: 100px;
 }
 input:focus, textarea:focus {
-    border-color: #304fff;
+    border-color: #e31919;
     color: #000;
 }
 h1, 
@@ -393,7 +391,7 @@ a {
 a:hover, 
 a:focus, 
 a:active {
-    color: #304fff;
+    color: #e31919;
     text-decoration: none;
 }
 a:focus,
@@ -464,7 +462,7 @@ html {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: #304fff;
+    background: #e31919;
     -webkit-animation: preloader-wave 1.6s linear infinite;
     animation: preloader-wave 1.6s linear infinite;
 }
@@ -666,7 +664,7 @@ html {
     color: #000;
 }
 .primary-nav-list .active > a, .primary-nav-list .menu-item > a:hover {
-    color: #304fff;
+    color: #e31919;
     background-color: transparent;
 }
 .primary-nav-list .current-menu-ancestor .current-menu-ancestor.current-menu-parent > a,
@@ -1073,7 +1071,7 @@ html {
 .single-others h4:before {
     content: "\f105";
     font-family: 'FontAwesome';
-    color: #304fff;
+    color: #e31919;
     position: absolute;
     left: 0;
     top: 0;
@@ -1101,7 +1099,7 @@ html {
 .single-education h3:before {
     content: "\f0a3";
     font-family: 'FontAwesome';
-    color: #304fff;
+    color: #e31919;
     position: absolute;
     left: 0;
     top: 2px;
@@ -1147,7 +1145,7 @@ html {
     top: inherit;
 }
 .inner-progress {
-    background-color: #304fff;
+    background-color: #e31919;
     position: relative;
     height: 6px;
 }
@@ -1159,7 +1157,7 @@ html {
     color: #fff;
     font-size: 12px;
     font-weight: 600;
-    background-color: #304fff;
+    background-color: #e31919;
     padding: 4px 6px;
     border-radius: 4px 4px 0 0;
 }
@@ -1176,7 +1174,7 @@ html {
 }
 /*Services*/
 .services .single-education i {
-    color: #304fff;
+    color: #e31919;
     position: absolute;
     left: 0;
     top: 1px;
@@ -1346,7 +1344,7 @@ html {
 .submit-btn {
     display: inline-block;
     border: none;
-    background-color: #304fff;
+    background-color: #e31919;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1399,7 +1397,7 @@ html {
 .social-btn a:hover,
 .social-btn a:focus {
     color: #fff;
-    background: #304fff;
+    background: #e31919;
 }
 .footer-contact {
     padding: 0;
@@ -1447,7 +1445,7 @@ html {
     line-height: 20px;
 }
 .copy-right a {
-    color: #304fff;
+    color: #e31919;
     font-size: inherit;
     line-height: inherit;
 }
