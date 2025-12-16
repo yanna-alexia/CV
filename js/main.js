@@ -49,6 +49,12 @@
 	    $('.parallax').parallax("50%", 0.3);
 
     // ---------- Typing effect ----------
+function initTypingEffect() {
+    const typedText = document.getElementById("typed-text");
+
+    // Only run if element exists
+    if (!typedText) return;
+
     const textArray = [
         "Research Scientist",
         "Geographer",
@@ -56,7 +62,6 @@
         "Coastal Environmental Scientist"
     ];
 
-    const typedText = document.getElementById("typed-text");
     const typingSpeed = 90;
     const deletingSpeed = 60;
     const delayBetween = 1500;
@@ -89,6 +94,13 @@
     }
 
     typeEffect();
+}
+
+// Delay typing effect until window loads
+$(window).on('load', function() {
+    initTypingEffect();
+});
+
 });
 
 
