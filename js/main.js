@@ -4,8 +4,7 @@
 
   /*
   |--------------------------------------------------------------------------
-  | Template Name: MYSELF
-  | Author: AWESOME THEMEZ
+  | Author: Yanna
   | Version: 1.0.0
   |--------------------------------------------------------------------------
   |--------------------------------------------------------------------------
@@ -48,7 +47,50 @@
 	    magnificPopupSetup();
 	    new WOW().init();
 	    $('.parallax').parallax("50%", 0.3);
-	});
+
+    // ---------- Typing effect ----------
+    const textArray = [
+        "Research Scientist",
+        "Geographer",
+        "Remote Senser",
+        "Coastal Environmental Scientist"
+    ];
+
+    const typedText = document.getElementById("typed-text");
+    const typingSpeed = 90;
+    const deletingSpeed = 60;
+    const delayBetween = 1500;
+
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+        const currentText = textArray[textIndex];
+
+        if (!isDeleting) {
+            typedText.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+
+            if (charIndex === currentText.length) {
+                setTimeout(() => isDeleting = true, delayBetween);
+            }
+        } else {
+            typedText.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+
+            if (charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % textArray.length;
+            }
+        }
+
+        setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
+    }
+
+    typeEffect();
+});
+
 
 
   	$(window).on('resize', function() {
