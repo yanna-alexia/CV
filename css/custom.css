@@ -26,20 +26,3 @@
         font-size: 18px;
     }
 }
-
-.site-header.small-height .primary-nav ul.primary-nav-list {
-    transform: none !important;
-    padding-right: 0;
-}
-
-.site-header.small-height .header-wrap {
-    height: 75px; /* ensure header shrinks */
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* vertically centers all children including nav */
-}
-
-.site-header.small-height .primary-nav .menu-item > a {
-    height: 75px;  /* matches small header height */
-    min-height: 75px;
-}
