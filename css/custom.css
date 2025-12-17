@@ -26,3 +26,8 @@
         font-size: 18px;
     }
 }
+
+.site-header.small-height .primary-nav ul.primary-nav-list {
+    transform: none !important;
+    padding-right: 0;
+}
