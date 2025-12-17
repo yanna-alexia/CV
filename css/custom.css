@@ -14,3 +14,16 @@
     0%, 50%, 100% { opacity: 1; }
     25%, 75% { opacity: 0; }
 }
+
+/* Ensure typed text is visible */
+#typed-text {
+    display: inline;
+    visibility: visible;
+}
+
+/* Optional: make it fit better on mobile */
+@media (max-width: 768px) {
+    .hero-text h3 {
+        font-size: 18px;
+    }
+}

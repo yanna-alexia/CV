@@ -23,9 +23,6 @@
       $('.parallax').parallax("50%", 0.3);
 
       // ---------- Typing effect ----------
-      const typedText = $("#typed-text");
-      if (typedText.length === 0) return; // exit if element not found
-
       const textArray = [
           "Research Scientist",
           "Geographer",
@@ -33,6 +30,7 @@
           "Coastal Environmental Scientist"
       ];
 
+      const typedText = document.getElementById("typed-text");
       const typingSpeed = 90;
       const deletingSpeed = 60;
       const delayBetween = 1500;
@@ -42,17 +40,23 @@
       let isDeleting = false;
 
       function typeEffect() {
+          // Check if element exists and is visible
+          if (!typedText || typedText.offsetParent === null) {
+              setTimeout(typeEffect, 200); // retry after 200ms
+              return;
+          }
+
           const currentText = textArray[textIndex];
 
           if (!isDeleting) {
-              typedText.text(currentText.substring(0, charIndex + 1));
+              typedText.textContent = currentText.substring(0, charIndex + 1);
               charIndex++;
 
               if (charIndex === currentText.length) {
                   setTimeout(() => isDeleting = true, delayBetween);
               }
           } else {
-              typedText.text(currentText.substring(0, charIndex - 1));
+              typedText.textContent = currentText.substring(0, charIndex - 1);
               charIndex--;
 
               if (charIndex === 0) {
@@ -65,6 +69,7 @@
       }
 
       typeEffect();
+
   });
 
   $(window).on('resize', function() {
