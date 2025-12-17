@@ -2,317 +2,220 @@
 
   "use strict";
 
-  /*
-  |--------------------------------------------------------------------------
-  | Author: Yanna
-  | Version: 1.0.0
-  |--------------------------------------------------------------------------
-  |--------------------------------------------------------------------------
-  | TABLE OF CONTENTS:
-  |--------------------------------------------------------------------------
-  |
-  | 1. Scripts initialization
-  | 2. Preloader
-  | 3. Primary Menu
-  | 4. Scroll Function
-  | 5. Section Active and Scrolling Animation
-  | 6. Scroll Up
-  | 8. Smooth Scroll
-  | 10. Portfolio
-  | 11. Magnific Popup
-  |
-  */
+  $(window).on('load', function() {
+      $(window).trigger("scroll");
+      $(window).trigger("resize");
+      preloaderSetup();
+      portfolioMsSetup();
+  });
 
-  /*--------------------------------------------------------------
-    1. Scripts initialization
-  --------------------------------------------------------------*/
+  $(document).ready(function() {
+      $(window).trigger("resize");
+      primaryMenuSetup();
+      mobileMenu();
+      scrollAnimation();
+      sectionActive();
+      scrollUp();
+      smoothScrollSetup();
+      portfolioMsSetup();
+      magnificPopupSetup();
+      new WOW().init();
+      $('.parallax').parallax("50%", 0.3);
 
- 	$(window).on('load', function() {
-      	$(window).trigger("scroll");
-      	$(window).trigger("resize");
-      	preloaderSetup();
-      	portfolioMsSetup();
-  	});
+      // ---------- Typing effect ----------
+      const typedText = $("#typed-text");
+      if (typedText.length === 0) return; // exit if element not found
 
+      const textArray = [
+          "Research Scientist",
+          "Geographer",
+          "Remote Senser",
+          "Coastal Environmental Scientist"
+      ];
 
-	$(document).ready(function() {
-	    $(window).trigger("resize");
-	    primaryMenuSetup();
-	    mobileMenu();
-        scrollAnimation();
-        sectionActive();
-	    scrollUp();
-	    smoothScrollSetup();
-	    portfolioMsSetup();
-	    magnificPopupSetup();
-	    new WOW().init();
-	    $('.parallax').parallax("50%", 0.3);
+      const typingSpeed = 90;
+      const deletingSpeed = 60;
+      const delayBetween = 1500;
 
-    // ---------- Typing effect ----------
-function initTypingEffect() {
-    const typedText = document.getElementById("typed-text");
+      let textIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
 
-    // Only run if element exists
-    if (!typedText) return;
+      function typeEffect() {
+          const currentText = textArray[textIndex];
 
-    const textArray = [
-        "Research Scientist",
-        "Geographer",
-        "Remote Senser",
-        "Coastal Environmental Scientist"
-    ];
+          if (!isDeleting) {
+              typedText.text(currentText.substring(0, charIndex + 1));
+              charIndex++;
 
-    const typingSpeed = 90;
-    const deletingSpeed = 60;
-    const delayBetween = 1500;
+              if (charIndex === currentText.length) {
+                  setTimeout(() => isDeleting = true, delayBetween);
+              }
+          } else {
+              typedText.text(currentText.substring(0, charIndex - 1));
+              charIndex--;
 
-    let textIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
+              if (charIndex === 0) {
+                  isDeleting = false;
+                  textIndex = (textIndex + 1) % textArray.length;
+              }
+          }
 
-    function typeEffect() {
-        const currentText = textArray[textIndex];
+          setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
+      }
 
-        if (!isDeleting) {
-            typedText.textContent = currentText.substring(0, charIndex + 1);
-            charIndex++;
+      typeEffect();
+  });
 
-            if (charIndex === currentText.length) {
-                setTimeout(() => isDeleting = true, delayBetween);
-            }
-        } else {
-            typedText.textContent = currentText.substring(0, charIndex - 1);
-            charIndex--;
+  $(window).on('resize', function() {
+      mobileMenu();
+      portfolioMsSetup();
+  });
 
-            if (charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % textArray.length;
-            }
-        }
+  $(window).on('scroll', function() {
+      scrollFunction();
+  });
 
-        setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
-    }
+  // -------------------------
+  // 2. Preloader
+  // -------------------------
+  function preloaderSetup() {
+      $("body").imagesLoaded(function () {
+          $(".preloader-wave").fadeOut();
+          $("#preloader").delay(200).fadeOut("slow").remove();
+      });
+  }
 
-    typeEffect();
-}
+  // -------------------------
+  // 3. Primary Menu
+  // -------------------------
+  function primaryMenuSetup() {
+      $( ".primary-nav-list" ).before( "<div class='m-menu-btn'><span></span></div>" );
 
-// Delay typing effect until window loads
-$(window).on('load', function() {
-    initTypingEffect();
-});
+      $(".m-menu-btn").on('click', function(){
+          $( this ).toggleClass( "m-menu-btn-ext" );
+          $(this).siblings('.primary-nav-list').slideToggle("slow");
+      });
 
-});
+      $( ".menu-item-has-children > ul" ).before( "<i class='fa fa-plus m-dropdown'></i>" );
 
+      $('.m-dropdown').on('click', function() {
+          $(this).siblings('ul').slideToggle("slow");
+          $(this).toggleClass("fa-plus fa-minus");
+      });
+  }
 
+  function mobileMenu() {
+      if ($(window).width() <= 983){  
+          $('.primary-nav').addClass('m-menu').removeClass('primary-nav');
+      } else {
+          $('.m-menu').addClass('primary-nav').removeClass('m-menu');
+      }
+  }
 
-  	$(window).on('resize', function() {
-	    mobileMenu();
-	    portfolioMsSetup();
-  	});
-
-
-	$(window).on('scroll', function() {
-	    scrollFunction();
-	});
-
-
-  /*--------------------------------------------------------------
-    2. Preloader
-  --------------------------------------------------------------*/
-
-  	function preloaderSetup() {
-
-	    $("body").imagesLoaded(function () {
-	      $(".preloader-wave").fadeOut();
-	      $("#preloader").delay(200).fadeOut("slow").remove();
-	    });
-
-  	}
-
-
-  /*--------------------------------------------------------------
-    3. Primary Menu
-  --------------------------------------------------------------*/
-  
-  	function primaryMenuSetup() {
-
-	    $( ".primary-nav-list" ).before( "<div class='m-menu-btn'><span></span></div>" );
-
-	    $(".m-menu-btn").on('click', function(){
-	      $( this ).toggleClass( "m-menu-btn-ext" );
-	      $(this).siblings('.primary-nav-list').slideToggle("slow");
-	    });
-
-        // Home Version-1
-        $(".sp-menu-btn").on('click', function(){
-          $( this ).toggleClass( "sp-m-menu-btn-ext" );
-          $(this).siblings('.primary-nav-list').toggleClass( "ex" );
-        }); //End
-
-	    $( ".menu-item-has-children > ul" ).before( "<i class='fa fa-plus m-dropdown'></i>" );
-
-	    $('.m-dropdown').on('click', function() {
-	      $(this).siblings('ul').slideToggle("slow");
-	      $(this).toggleClass("fa-plus fa-minus");
-	    });
-
-  	}
-
-
-  	function mobileMenu() {
-
-    	if ($(window).width() <= 983){  
-      		$('.primary-nav').addClass('m-menu').removeClass('primary-nav');
-    	} else {
-      		$('.m-menu').addClass('primary-nav').removeClass('m-menu');
-    	}
-
-  	}
-
-
-  /*--------------------------------------------------------------
-    4. Scroll Function
-  --------------------------------------------------------------*/
-
+  // -------------------------
+  // 4. Scroll Function
+  // -------------------------
   function scrollFunction() {
+      var scroll = $(window).scrollTop();
 
-    var scroll = $(window).scrollTop();
-
-    if(scroll >= 10) {
-        $(".site-header").addClass("small-height");
+      if(scroll >= 10) {
+          $(".site-header").addClass("small-height");
       } else {
           $(".site-header").removeClass("small-height");
       }
 
-    // For Scroll Up
-    if(scroll >= 350) {
-        $(".scrollup").addClass("scrollup-show");
+      if(scroll >= 350) {
+          $(".scrollup").addClass("scrollup-show");
       } else {
           $(".scrollup").removeClass("scrollup-show");
       }
-
   }
 
-
-  /*--------------------------------------------------------------
-    5. Section Active and Scrolling Animation
-  --------------------------------------------------------------*/
-
+  // -------------------------
+  // 5. Section Active and Scrolling Animation
+  // -------------------------
   function scrollAnimation() {
-
-    $('a').bind('click', function(event) {
-      var $anchor = $(this);
-      $('html, body').stop().animate({
-        scrollTop: ($($anchor.attr('href')).offset().top - 69)
-        }, 1250, 'easeInOutExpo');
-        event.preventDefault();
-    });
-
+      $('a').bind('click', function(event) {
+          var $anchor = $(this);
+          $('html, body').stop().animate({
+              scrollTop: ($($anchor.attr('href')).offset().top - 69)
+          }, 1250, 'easeInOutExpo');
+          event.preventDefault();
+      });
   }
 
   function sectionActive() {
-
-    $('body').scrollspy({
-      target: '.site-header',
-      offset: 70
-    });
+      $('body').scrollspy({
+          target: '.site-header',
+          offset: 70
+      });
   }
 
+  // -------------------------
+  // 6. Scroll Up
+  // -------------------------
+  function scrollUp() {
+      $( "body" ).append( "<span class='scrollup'></span>" );
+      $('.scrollup').on('click', function(e) {
+          e.preventDefault();
+          $('html,body').animate({ scrollTop: 0 }, 1000);
+      });
+  }
 
-  /*--------------------------------------------------------------
-    6. Scroll Up
-  --------------------------------------------------------------*/
+  // -------------------------
+  // 8. Smooth Scroll
+  // -------------------------
+  function smoothScrollSetup() {
+      if (typeof smoothScroll == 'object') {
+          smoothScroll.init();
+      }
+  }
 
-  	function scrollUp() {
-
-    	$( "body" ).append( "<span class='scrollup'></span>" );
-
-    	$('.scrollup').on('click', function(e) {
-	      	e.preventDefault();
-	      	$('html,body').animate({
-	        	scrollTop: 0
-	      	}, 1000);
-    	});
-
-  	}
-
-
-
-  /*--------------------------------------------------------------
-    8. Smooth Scroll
-  --------------------------------------------------------------*/
-
-  	function smoothScrollSetup() {
-
-    	if (typeof smoothScroll == 'object') {
-      		smoothScroll.init();
-    	}
-
-  	}
-
-
-    /*--------------------------------------------------------------
-    10. Portfolio
-    --------------------------------------------------------------*/
-
-    function portfolioMsSetup() {
-
-        $('.portfolio').isotope({
+  // -------------------------
+  // 10. Portfolio
+  // -------------------------
+  function portfolioMsSetup() {
+      $('.portfolio').isotope({
           itemSelector: '.portfolio-item',
           transitionDuration: '0.60s',
           percentPosition: true,
-          masonry: {
-            columnWidth: '.grid-sizer'
+          masonry: { columnWidth: '.grid-sizer' }
+      });
+
+      $('.portfolio-filter ul li').on('click', function(event) {
+          $(this).siblings('.active').removeClass('active');
+          $(this).addClass('active');
+          event.preventDefault();
+      });
+
+      $('.portfolio-filter ul').on('click', 'a', function() {
+          var filterElement = $(this).attr('data-filter');
+          $(this).parents(".portfolio-filter").next().isotope({
+              filter: filterElement
+          });
+      });
+  }
+
+  // -------------------------
+  // 11. Magnific Popup
+  // -------------------------
+  function magnificPopupSetup() {
+      $('.zoom-gallery').magnificPopup({
+          delegate: 'a',
+          type: 'image',
+          closeOnContentClick: false,
+          closeBtnInside: false,
+          mainClass: 'mfp-with-zoom mfp-img-mobile',
+          gallery: { enabled: true },
+          zoom: {
+              enabled: true,
+              duration: 300,
+              opener: function(element) {
+                  return element.find('img');
+              }
           }
-        });
+      });
+  }
 
-        /* Active Class of Portfolio*/
-        $('.portfolio-filter ul li').on('click', function(event) {
-            $(this).siblings('.active').removeClass('active');
-            $(this).addClass('active');
-            event.preventDefault();
-        });
-
-        /*=== Portfolio filtering ===*/
-        $('.portfolio-filter ul').on('click', 'a', function() {
-            var filterElement = $(this).attr('data-filter');
-            $(this).parents(".portfolio-filter").next().isotope({
-                filter: filterElement
-            });
-        });
-
-    }
-
-
-  /*--------------------------------------------------------------
-    11. Magnific Popup
-  --------------------------------------------------------------*/
-
-  	function magnificPopupSetup() {
-
-	    $('.zoom-gallery').magnificPopup({
-	        delegate: 'a',
-	        type: 'image',
-	        closeOnContentClick: false,
-	        closeBtnInside: false,
-	        mainClass: 'mfp-with-zoom mfp-img-mobile',
-	        gallery: {
-	            enabled: true
-	        },
-	        zoom: {
-	            enabled: true,
-	            duration: 300, // don't foget to change the duration also in CSS
-	            opener: function(element) {
-	                return element.find('img');
-	            }
-	        }
-	        
-	    });
-	    
-  	}
-
-
-   
-})(jQuery); // End of use strict
-
-
+})(jQuery);
