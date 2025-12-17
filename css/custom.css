@@ -40,6 +40,6 @@
 }
 
 .site-header.small-height .primary-nav .menu-item > a {
-    height: 70px;  /* matches small header height */
-    min-height: 70px;
+    height: 75px;  /* matches small header height */
+    min-height: 75px;
 }
