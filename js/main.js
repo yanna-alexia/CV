@@ -22,53 +22,63 @@
       new WOW().init();
       $('.parallax').parallax("50%", 0.3);
 
-      // ---------- Typing effect ----------
-      const textArray = [
-          "Research Scientist",
-          "Geographer",
-          "Remote Senser",
-          "Coastal Environmental Scientist"
-      ];
+function startTypewriter() {
+    const textArray = [
+        "Research Scientist",
+        "Geographer",
+        "Remote Senser",
+        "Coastal Environmental Scientist"
+    ];
 
-      const typedText = document.getElementById("typed-text");
-      const typingSpeed = 90;
-      const deletingSpeed = 60;
-      const delayBetween = 1500;
+    const typedText = document.getElementById("typed-text");
+    if (!typedText) return; // Element not yet available
 
-      let textIndex = 0;
-      let charIndex = 0;
-      let isDeleting = false;
+    const typingSpeed = 95;
+    const deletingSpeed = 60;
+    const delayBetween = 1200;
 
-      function typeEffect() {
-          // Check if element exists and is visible
-          if (!typedText || typedText.offsetParent === null) {
-              setTimeout(typeEffect, 200); // retry after 200ms
-              return;
-          }
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
-          const currentText = textArray[textIndex];
+    function typeEffect() {
+        if (!typedText) return; // Safety check in case element disappears
+        const currentText = textArray[textIndex];
 
-          if (!isDeleting) {
-              typedText.textContent = currentText.substring(0, charIndex + 1);
-              charIndex++;
+        if (!isDeleting) {
+            typedText.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
 
-              if (charIndex === currentText.length) {
-                  setTimeout(() => isDeleting = true, delayBetween);
-              }
-          } else {
-              typedText.textContent = currentText.substring(0, charIndex - 1);
-              charIndex--;
+            if (charIndex === currentText.length) {
+                setTimeout(() => isDeleting = true, delayBetween);
+            }
+        } else {
+            typedText.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
 
-              if (charIndex === 0) {
-                  isDeleting = false;
-                  textIndex = (textIndex + 1) % textArray.length;
-              }
-          }
+            if (charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % textArray.length;
+            }
+        }
 
-          setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
-      }
+        setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
+    }
 
-      typeEffect();
+    typeEffect();
+}
+
+// Run after full page load and DOM ready
+function initTypewriter() {
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        startTypewriter();
+    } else {
+        window.addEventListener("DOMContentLoaded", startTypewriter);
+    }
+}
+
+initTypewriter();
+
 
   });
 
