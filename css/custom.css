@@ -26,3 +26,23 @@
         font-size: 18px;
     }
 }
+
+.site-header.small-height .header-wrap {
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* vertically centers nav and logo */
+}
+
+.site-header.small-height .primary-nav ul.primary-nav-list {
+    transform: none !important; /* cancel any home-v1 translate */
+    padding-right: 0 !important;
+    display: flex !important; /* ensure visible */
+}
+
+.site-header.small-height .primary-nav .menu-item > a {
+    height: 75px;
+    min-height: 75px;
+    display: flex;
+    align-items: center;
+}
