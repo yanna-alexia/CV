@@ -31,3 +31,8 @@
     transform: none !important;
     padding-right: 0;
 }
+
+.site-header.small-height .primary-nav {
+    position: relative;
+    top: -25px; /* adjust as needed */
+}
