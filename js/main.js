@@ -27,7 +27,7 @@ function startTypewriter() {
         "Research Scientist",
         "Geographer",
         "Remote Senser",
-        "Coastal Environmental Scientist"
+        "Coastal Observer"
     ];
 
     const typedText = document.getElementById("typed-text");

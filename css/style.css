@@ -1509,10 +1509,10 @@ html {
 --------------------------------------------------------------*/
 .scrollup {
     position: fixed;
-    background-color: rgba(48, 79, 255, 0.7);
+    background-color: #7f7f7f;
     bottom: -60px;
     right: 25px;
-    color: #fff;
+    color: #e31919;
     padding: 5px;
     height: 36px;
     width: 36px;
@@ -1533,7 +1533,7 @@ html {
     border-radius: 50%;
 }
 .scrollup:hover {
-    background-color: rgba(48, 79, 255, 1);
+    background-color: #e31919;
 }
 .scrollup:before {
     content: "\f102";
@@ -3044,7 +3044,7 @@ html {
 12. Site Footer
 --------------------------------------------------------------*/
 .site-footer {
-    background-color: #E5E5FF;
+    background-color: #e31919;
     padding: 55px 0 50px;
 }
 .social-btn {
