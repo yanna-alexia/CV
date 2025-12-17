@@ -33,9 +33,9 @@ function startTypewriter() {
     const typedText = document.getElementById("typed-text");
     if (!typedText) return; // Element not yet available
 
-    const typingSpeed = 95;
+    const typingSpeed = 85;
     const deletingSpeed = 60;
-    const delayBetween = 1200;
+    const delayBetween = 900;
 
     let textIndex = 0;
     let charIndex = 0;
