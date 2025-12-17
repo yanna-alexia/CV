@@ -1646,7 +1646,7 @@ html {
 .nav>li>a:focus, .nav>li>a:hover {
     background-color: transparent;
 }
-.primary-nav .menu-item > a {
+/*.primary-nav .menu-item > a {
     font-size: 12px;
     letter-spacing: 0.25px;
     text-transform: uppercase;
@@ -1659,7 +1659,23 @@ html {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+}*/
+.primary-nav .menu-item > a {
+    font-size: 12px;
+    letter-spacing: 0.25px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0 5px;
+    height: 100%;
+    min-height: unset;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
+
 .site-header .primary-nav .menu-item > a {
     height: 80px;
     min-height: 80px;
